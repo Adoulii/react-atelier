@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 function Event(props) {
   const [nbParticipants, setNbParticipants] = useState(props.nbParticipants);
   const [nbTickets, setNbTickets] = useState(props.nbTickets);
@@ -14,7 +15,7 @@ function Event(props) {
       console.log("changing image");
       setImg("sold_out.png");
     }
-    // alert("You have booked an event");
+    alert("You have booked an event");
   };
 
   const handleLikeState = () => {
@@ -30,13 +31,19 @@ function Event(props) {
         ></img>
 
         <div className="px-6 py-4">
-          <p className="font-bold text-xl mb-2">{props.name}</p>
+          <Link
+            to={`/event/${props.name}`}
+            className="text-black hover:text-gray-300 font-bold text-xl mb-2"
+          >
+            {props.name}
+          </Link>
           <p className="text-gray-700 text-base">Price: {props.price}</p>
           <div className=" pt-4 pb-2">
             <p>Number of tickets: {nbTickets}</p>
             <p>Number of Participants: {nbParticipants}</p>
           </div>
         </div>
+
         <button
           onClick={() => bookEvent()}
           disabled={nbTickets == 0}
