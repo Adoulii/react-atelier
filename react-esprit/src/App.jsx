@@ -8,10 +8,9 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Events from "./components/Events.jsx";
-import NotFound from "./components/NotFound.jsx";
 import EventDetails from "./components/EventDetails.jsx";
 import React from "react";
+import AddEvent from "./components/AddEvent.jsx";
 function App() {
   const [count, setCount] = useState(0);
   const Events = React.lazy(() => import("./components/Events.jsx"));
@@ -28,6 +27,7 @@ function App() {
             ></Route>
             <Route path="/events" element={<Events />} />
             <Route path="/event/:eventTitle" element={<EventDetails />} />
+            <Route path="/events/new" element={<AddEvent />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

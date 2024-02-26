@@ -14,6 +14,9 @@ function NavigationBar() {
             <Link to="/events" className="text-white hover:text-gray-300">
               Events
             </Link>
+            <Link to="/events/new" className="text-white hover:text-gray-300">
+              Add new event
+            </Link>
           </div>
         </div>
       </div>
