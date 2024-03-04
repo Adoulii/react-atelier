@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:3001/events";
+const url = "http://localhost:3000/events";
 
 export default class DataService {
   static async getallEvents(id) {

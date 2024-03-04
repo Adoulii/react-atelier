@@ -3,24 +3,16 @@ import eventList from "../data/events.json";
 import Event from "./event";
 import NavigationBar from "./NavigationBar";
 import DataService from "../services/api";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchEvents, selectEvents } from "../redux/slices/eventslice";
 function Events() {
+  const dispatch = useDispatch();
+  const [events, errors] = useSelector(selectEvents);
   const [isLoading, setIsLoading] = useState(false);
-  const [events, setEvents] = useState([]);
-
-  const fetchEvents = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const { data } = await DataService.getallEvents();
-      setEvents(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setTimeout(false);
-    }
-  });
 
   useEffect(() => {
-    fetchEvents();
+    dispatch(fetchEvents());
+    console.log(events);
   }, []);
 
   return (
