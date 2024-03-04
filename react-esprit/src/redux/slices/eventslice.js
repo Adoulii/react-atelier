@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import DataService from "../../services/api";
-import { useDispatch } from "react-redux";
 let initialState = {
   events: [],
   selectedEvent: {},
@@ -53,7 +52,6 @@ export const fetchEvents = () => async (dispatch) => {
     dispatch(setErrors(error));
   }
 };
-
 
 export const selectEvents = (state) => {
   return [state.events.events, state.events.errors];

@@ -13,6 +13,7 @@ import React from "react";
 import AddEvent from "./components/AddEvent.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchEvents } from "./redux/slices/eventslice.js";
+import WhishListItems from "./components/WhishListItems.jsx";
 function App() {
   const [count, setCount] = useState(0);
   const Events = React.lazy(() => import("./components/Events.jsx"));
@@ -34,6 +35,7 @@ function App() {
             />
             <Route path="/event/:eventTitle" element={<EventDetails />} />
             <Route path="/events/new" element={<AddEvent />} />
+            <Route path="/wishlist" element={<WhishListItems />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>

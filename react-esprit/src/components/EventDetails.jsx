@@ -2,10 +2,17 @@ import data from "../data/events.json";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectSelectedEvent,
+  updateEventReducer,
+} from "../redux/slices/eventslice";
 function EventDetails(props) {
   const { eventTitle } = useParams();
-  const [eventDetails, setEventDetails] = useState(null);
   const [isLiked, SetIsLike] = useState(false);
+
+  const dispatch = useDispatch();
+  const eventDetails = useSelector(selectSelectedEvent);
 
   const fetchEventDetails = (eventName) => {
     const event = data.find((event) => event.name === eventName);
@@ -13,7 +20,6 @@ function EventDetails(props) {
   };
   useEffect(() => {
     const details = fetchEventDetails(eventTitle);
-    setEventDetails(details);
   }, [eventTitle]);
 
   if (!eventDetails) {
@@ -21,8 +27,13 @@ function EventDetails(props) {
   }
   const { name, price, nbTickets, nbParticipants, img } = props;
   const bookEvent = () => {
-    setNbParticipants(nbParticipants + 1);
-    setNbTickets(nbTickets - 1);
+    dispatch(
+      updateEventReducer({
+        ...eventDetails,
+        nbParticipants: nbParticipants + 1,
+        nbTickets: nbTickets - 1,
+      })
+    );
     if (nbTickets == 1) {
       console.log("changing image");
       setImg("sold_out.png");
@@ -53,7 +64,7 @@ function EventDetails(props) {
           <button
             onClick={() => bookEvent()}
             disabled={nbTickets == 0}
-            className=" inline-flex items-center  px-3 py-2 text-sm  text-center  bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300bg-blue-500 hover:bg-blue-700 text-white font-bold  rounded"
+            className=" inline-flex items-center  px-3 py-2 text-sm  text-center  bg-blue-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300bg-blue-500  text-white font-bold  rounded"
           >
             Book an event
           </button>
