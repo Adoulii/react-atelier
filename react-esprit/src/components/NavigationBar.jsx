@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+import { selectWishlistCount } from "../redux/slices/whishlistSlice";
+
 function NavigationBar() {
+  const wishlistCount = useSelector(selectWishlistCount);
+
   return (
     <>
       <div className="bg-blue-500 p-4">
@@ -18,7 +23,7 @@ function NavigationBar() {
               Add new event
             </Link>
             <Link to="/wishlist" className="text-white hover:text-gray-300">
-              WhishList
+              WhishList ({wishlistCount})
             </Link>
           </div>
         </div>

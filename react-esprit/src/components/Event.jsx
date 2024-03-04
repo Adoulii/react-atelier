@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishlist } from "../redux/slices/whishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../redux/slices/whishlistSlice";
 function Event(props) {
   const dispatch = useDispatch();
   const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
@@ -9,7 +12,6 @@ function Event(props) {
   const [nbTickets, setNbTickets] = useState(props.nbTickets);
   const [img, setImg] = useState(props.img);
   const [isLiked, SetIsLike] = useState(false);
-
   var imgUlr = props.img;
   const bookEvent = () => {
     setNbParticipants(nbParticipants + 1);
